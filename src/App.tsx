@@ -3,7 +3,7 @@ import ImageComponent from './components/ImageComponent';
 import Modal from './components/Modal'; // Import the Modal component
 import SortOptions from './components/SortOptions';
 import styled from 'styled-components';
-import axios from 'axios';
+import axios , {AxiosError} from 'axios';
 import { ClipLoader } from 'react-spinners';
 import { ToastContainer, toast } from 'react-toastify'; // Import ToastContainer and toast
 import 'react-toastify/dist/ReactToastify.css'; // Import the styles for the toast notifications
@@ -67,6 +67,10 @@ interface ImageData {
   [key: string]: any;
 }
 
+interface CategoryData {
+  [page: number]: ImageData[];
+}
+
 function App() {
   // States for search input, sort criteria, and modal
   const [category, setCategory] = useState<string>('sport');
@@ -77,7 +81,7 @@ function App() {
   const [loading, setLoading] = useState<boolean>(true);
   const [finishAllPhotos, setFinishAllPhotos] = useState<boolean>(false); // To show a message when no more images
   const [page, setPage] = useState<number>(1);
-  const [dataByCategory, setDataByCategory] = useState<Record<string, any>>({});
+  const [dataByCategory, setDataByCategory] = useState<Record<string, CategoryData>>({});
   console.log(dataByCategory)
   useEffect(() => {
     const fetchData = async () => {
@@ -110,13 +114,13 @@ function App() {
           },
         }));
         setLoading(false);
-      } catch (e: any) {
+      } catch (e: unknown) {
         // Handling error responses (404, 500, etc.)
-        if (e.response) {
-          // Server responded with an error status code
+        if (axios.isAxiosError(e) && e.response) {
+          // Axios error handling
           if (e.response.status === 404) {
-            toast.error(e.response.data.error,{
-              autoClose: 700, 
+            toast.error(e.response.data.error, {
+              autoClose: 700,
             }); // Display toast on 404 error
           } else {
             toast.error('An error occurred while fetching data.'); // Display general error message
