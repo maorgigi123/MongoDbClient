@@ -1,11 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-// Define the types for the image data
-interface ImageData {
-  id: number;
-  [key: string]: any;
-}
-
+import { ImageData } from '../models';
 
 // Define the props for the component
 interface ImageComponentProps {

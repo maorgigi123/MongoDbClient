@@ -7,6 +7,7 @@ import axios from 'axios';
 import { ClipLoader } from 'react-spinners';
 import { ToastContainer, toast } from 'react-toastify'; // Import ToastContainer and toast
 import 'react-toastify/dist/ReactToastify.css'; // Import the styles for the toast notifications
+import { CategoryData, ImageData } from './models';
 
 // Styled Components
 const Container = styled.div`
@@ -62,14 +63,6 @@ const Button = styled.button`
   }
 `;
 
-interface ImageData {
-  id: number;
-  [key: string]: any;
-}
-
-interface CategoryData {
-  [page: number]: ImageData[];
-}
 
 function App() {
   // States for search input, sort criteria, and modal
