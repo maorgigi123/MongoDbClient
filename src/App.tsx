@@ -3,7 +3,7 @@ import ImageComponent from './components/ImageComponent';
 import Modal from './components/Modal'; // Import the Modal component
 import SortOptions from './components/SortOptions';
 import styled from 'styled-components';
-import axios , {AxiosError} from 'axios';
+import axios from 'axios';
 import { ClipLoader } from 'react-spinners';
 import { ToastContainer, toast } from 'react-toastify'; // Import ToastContainer and toast
 import 'react-toastify/dist/ReactToastify.css'; // Import the styles for the toast notifications
