@@ -90,7 +90,7 @@ function App() {
         setLoading(true);
         const apiUrl = import.meta.env.VITE_APP_API_URL; // Access the API URL from the environment variable
         console.log(apiUrl, category, page);
-        const response = await axios.get(`${apiUrl}/images?category=${category}&page=${page}`);
+        const response = await axios.get(`${apiUrl}/images?category=${encodeURIComponent(category)}&page=${encodeURIComponent(page)}`);
         const result = response.data;
         if (result.length <= 0) {
           setFinishAllPhotos(true);
