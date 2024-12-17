@@ -63,7 +63,6 @@ const Button = styled.button`
   }
 `;
 
-
 function App() {
   // States for search input, sort criteria, and modal
   const [category, setCategory] = useState<string>('sport');
