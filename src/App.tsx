@@ -118,7 +118,7 @@ function App() {
         // Handling error responses (404, 500, etc.)
         if (axios.isAxiosError(e) && e.response) {
           // Axios error handling
-          if (e.response.status === 404) {
+          if (e.response.status === 404 || e.response.status === 500) {
             toast.error(e.response.data.error, {
               autoClose: 700,
             }); // Display toast on 404 error
